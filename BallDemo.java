@@ -41,7 +41,7 @@ public class BallDemo
             int azul = random.nextInt(256);
             Color ramColor = new Color(rojo, verde, azul);
             int diametro = random.nextInt(50) + 10;
-            int x = random.nextInt(151);
+            int x = random.nextInt(200);
             int y = random.nextInt(151);
 
             BouncingBall ball = new BouncingBall(x, y,diametro,ramColor,ground,myCanvas);

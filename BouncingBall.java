@@ -19,7 +19,9 @@ import java.awt.geom.*;
 public class BouncingBall
 {
     private static final int GRAVITY = 3;  // effect of gravity
-
+    private static int cantidadDeBolasExistentes = 0;
+    
+    
     private int ballDegradation = 2;
     private Ellipse2D.Double circle;
     private Color color;
@@ -49,6 +51,7 @@ public class BouncingBall
         diameter = ballDiameter;
         groundPosition = groundPos;
         canvas = drawingCanvas;
+        cantidadDeBolasExistentes++;
     }
 
     /**
@@ -105,5 +108,8 @@ public class BouncingBall
     public int getYPosition()
     {
         return yPosition;
+    }
+     public static int getCantidadDeBolasExistentes() {
+        return cantidadDeBolasExistentes;
     }
 }

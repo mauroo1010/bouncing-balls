@@ -1,5 +1,6 @@
 import java.awt.Color;
-
+import java.util.Random;
+import java.util.ArrayList;
 /**
  * Class BallDemo - a short demonstration showing animation with the 
  * Canvas class. 
@@ -23,30 +24,45 @@ public class BallDemo
     /**
      * Simulate two bouncing balls
      */
-    public void bounce()
+    public void bounce(int bolas)
     {
         int ground = 400;   // position of the ground line
-
+        ArrayList<BouncingBall> balls = new ArrayList<BouncingBall>();
+        Random random = new Random();
         myCanvas.setVisible(true);
 
         // draw the ground
         myCanvas.drawLine(50, ground, 550, ground);
 
-        // crate and show the balls
-        BouncingBall ball = new BouncingBall(50, 50, 16, Color.BLUE, ground, myCanvas);
-        ball.draw();
-        BouncingBall ball2 = new BouncingBall(70, 80, 20, Color.RED, ground, myCanvas);
-        ball2.draw();
+        int i = 0;
+        while (i < bolas) {
+            int rojo = random.nextInt(256);
+            int verde = random.nextInt(256);
+            int azul = random.nextInt(256);
+            Color ramColor = new Color(rojo, verde, azul);
+            int diametro = random.nextInt(50) + 10;
+            int x = random.nextInt(151);
+            int y = random.nextInt(151);
+
+            BouncingBall ball = new BouncingBall(x, y,diametro,ramColor,ground,myCanvas);
+
+            balls.add(ball);
+            ball.draw();
+            i++;
+        }        
 
         // make them bounce
         boolean finished =  false;
         while(!finished) {
-            myCanvas.wait(50);           // small delay
-            ball.move();
-            ball2.move();
-            // stop once ball has travelled a certain distance on x axis
-            if(ball.getXPosition() >= 550 || ball2.getXPosition() >= 550) {
-                finished = true;
+            myCanvas.wait(20); // small delay
+            int n = 0;
+            while (n < balls.size()) {
+                balls.get(n).move();
+                // stop once ball has travelled a certain distance on x axis
+                if (balls.get(n).getXPosition() >= 550) {
+                    finished = true;
+                }
+                n++;
             }
         }
     }
